@@ -15,7 +15,7 @@ pipeline {
         SONAR_TOKEN = credentials('shipyard-sonarqube')
         SONAR_PROJECT = 'shipyard-project-java'
         SONAR_SOURCE = "java_webapp/src, java_webapp_polyglot/src"
-        SONAR_REPORTS = 'java_webapp/target/surefire-reports, java_webapp_polyglot/target/surefire-reports'
+        SONAR_REPORTS = 'java_webapp/target/surefire-reports,java_webapp_polyglot/target/surefire-reports'
         JACOCO_REPORT = "java_webapp*/target/*.exec"
     }
 
