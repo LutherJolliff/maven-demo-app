@@ -14,7 +14,7 @@ pipeline {
         JOB_NAME = "${JOB_NAME}"
         SONAR_TOKEN = credentials('shipyard-sonarqube')
         SONAR_PROJECT = 'shipyard-project-java'
-        SONAR_SOURCE = "java_webapp/src/main/java/com/acme/module1/*.java,java_webapp_polyglot/src/main/java/com/acme/module2/*.java"
+        SONAR_SOURCE = "java_webapp/src/main/java/com/acme/module1,java_webapp_polyglot/src/main/java/com/acme/module2"
         SONAR_REPORTS = 'java_webapp/target/surefire-reports,java_webapp_polyglot/target/surefire-reports'
         JACOCO_REPORT = "java_webapp*/target/*.exec"
     }
