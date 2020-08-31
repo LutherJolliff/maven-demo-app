@@ -18,6 +18,7 @@ pipeline {
         SONAR_REPORTS = 'java_webapp/target/surefire-reports,java_webapp_polyglot/target/surefire-reports'
         JACOCO_REPORT = "java_webapp/target/jacoco.exec,java_webapp_polyglot/target/jacoco.exec"
         JAVA_BINARIES = "java_webapp/target,java_webapp_polyglot/target"
+        SONAR_TESTS   = 'tests/src/test/java/com/acme/its/ModulesTest.java'
     }
 
     stages {
@@ -46,7 +47,7 @@ pipeline {
                 withSonarQubeEnv('Cynerge Sonarqube') {
                     sh "printenv"
                     sh "ls $WORKSPACE/java_webapp/target"
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCE -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT -Dsonar.java.binaries=$JAVA_BINARIES"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCE -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT -Dsonar.java.binaries=$JAVA_BINARIES -Dsonar.tests=$SONAR_TESTS"
                 }
             }
         }
