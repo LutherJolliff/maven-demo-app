@@ -11,8 +11,8 @@
   <name>Example of multi-module Maven project</name>
 
   <modules>
-    <module>module1</module>
-    <module>module2</module>
+    <module>java_webapp</module>
+    <module>java_webapp_polyglot</module>
     <module>tests</module>
   </modules>
 
@@ -55,6 +55,16 @@
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>0.8.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M1</version>
         </plugin>
       </plugins>
     </pluginManagement>

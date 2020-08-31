@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>If you are reading this, your container has updated!</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container-fluid" >
+    <div style="margin-top: 20px;" class="jumbotron">
+      <p style="font-size: 48px;" th:inline="text">[[${lang}]]</p>
+      <ul class="list-inline">
+        <li><a href="/en">English</a></li>
+        <li><a href="/zh">中文</a></li>
+        <li><a href="/sp">Español</a></li>
+        <li><a href="/hi">हिंदी</a></li>
+        <li><a href="/ar">عربى</a></li>
+        <li><a href="/jp">日本語</a></li>
+      </ul>
+    </div>
+    <p style="font-size: 14px;" th:inline="text">Version: [[${version}]] Hostname: [[${hostname}]]</p>
+</div>
+</body>
+</html>
