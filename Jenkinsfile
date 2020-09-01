@@ -29,8 +29,6 @@ pipeline {
         stage('Unit Testing') {
             steps {
                 sh 'mvn test'
-                sh 'ls'
-                sh 'pwd'
             }
             post {
                 always {
@@ -38,17 +36,25 @@ pipeline {
                 }
             }
         }
-        stage('Sonarqube Analysis') {
-            environment {
-                scannerHome = tool 'cynerge-sonarqube'
+        // stage('Sonarqube Analysis') {
+        //     environment {
+        //         scannerHome = tool 'cynerge-sonarqube'
+        //     }
+        //     steps {
+        //         withSonarQubeEnv('Cynerge Sonarqube') {
+        //             sh "mvn -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT clean verify sonar:sonar"
+        //         }
+        //     }
+        // }
+        stage('Store Maven Artifact') {
+            environment { 
+                MAVEN_USER = credentials('nexus-user')
+                MAVEN_PASS = credentials('nexus-pass')
+                NPM_REGISTRY = credentials('nexus-repo')
             }
             steps {
-                withSonarQubeEnv('Cynerge Sonarqube') {
-                    sh "printenv"
-                    sh "ls $WORKSPACE/java_webapp/target"
-                    // sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCE -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT -Dsonar.java.binaries=$JAVA_BINARIES"
-                    sh "mvn -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT clean verify sonar:sonar"
-                }
+                sh 'env'
+                sh "curl -v -u $MAVEN_USER:$MAVEN_PASS --upload-file java_webapp/target/*.jar http://nexus-internal.testcompany.shipyard.cloud/repository/maven-releases/${env.JOB_NAME}/"
             }
         }
     }
