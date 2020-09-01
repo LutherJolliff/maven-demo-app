@@ -16,7 +16,7 @@ pipeline {
         SONAR_PROJECT = 'shipyard-project-java'
         SONAR_SOURCE = "java_webapp/src,java_webapp_polyglot/src"
         SONAR_REPORTS = 'target/surefire-reports'
-        JACOCO_REPORT = "target/jacoco.exec"
+        JACOCO_REPORT = "$WORKSPACE/target/site/jacoco-aggregate/jacoco.xml"
         JAVA_BINARIES = "java_webapp/target,java_webapp_polyglot/target"
     }
 
