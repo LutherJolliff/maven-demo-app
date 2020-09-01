@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh 'env'
-                sh "curl -v -u $MAVEN_USER:$MAVEN_PASS --upload-file java_webapp/target/java-webapp*.jar http://nexus-internal.testcompany.shipyard.cloud:80/repository/maven-releases/com/$JOB_NAME/1.0.0-RC1/myArtifact-1.0.0-RC1.jar"
+                sh "curl -v -u $MAVEN_USER:$MAVEN_PASS --upload-file java_webapp/target/java-webapp*.jar http://nexus-internal.testcompany.shipyard.cloud:80/repository/maven-releases/com/$JOB_NAME/myArtifact/1.0.0-RC1/myArtifact-1.0.0-RC1.jar"
             }
         }
     }
