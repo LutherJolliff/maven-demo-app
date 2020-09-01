@@ -14,10 +14,8 @@ pipeline {
         JOB_NAME = "${JOB_NAME}"
         SONAR_TOKEN = credentials('shipyard-sonarqube')
         SONAR_PROJECT = 'shipyard-project-java'
-        SONAR_SOURCE = "java_webapp/src,java_webapp_polyglot/src"
         SONAR_REPORTS = 'target/surefire-reports'
         JACOCO_REPORT = "$WORKSPACE/tests/target/site/jacoco-aggregate/jacoco.xml"
-        JAVA_BINARIES = "java_webapp/target,java_webapp_polyglot/target"
     }
 
     stages {
@@ -36,25 +34,26 @@ pipeline {
                 }
             }
         }
-        // stage('Sonarqube Analysis') {
-        //     environment {
-        //         scannerHome = tool 'cynerge-sonarqube'
-        //     }
-        //     steps {
-        //         withSonarQubeEnv('Cynerge Sonarqube') {
-        //             sh "mvn -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT clean verify sonar:sonar"
-        //         }
-        //     }
-        // }
+        stage('Sonarqube Analysis') {
+            environment {
+                scannerHome = tool 'cynerge-sonarqube'
+            }
+            steps {
+                withSonarQubeEnv('Cynerge Sonarqube') {
+                    sh "mvn -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.junit.reportPaths=$SONAR_REPORTS -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT clean verify sonar:sonar"
+                }
+            }
+        }
         stage('Store Maven Artifact') {
             environment { 
                 MAVEN_USER = credentials('nexus-user')
                 MAVEN_PASS = credentials('nexus-pass')
-                NPM_REGISTRY = credentials('nexus-repo')
+                MAVEN_REPO = credentials('nexus-maven-repo')
+
             }
             steps {
                 sh 'env'
-                sh "curl -v -u $MAVEN_USER:$MAVEN_PASS --upload-file java_webapp/target/java-webapp*.jar http://nexus-internal.testcompany.shipyard.cloud:80/repository/maven-releases/com/$JOB_NAME/java-webapp/1.0.0-RC1/java-webapp-1.0.0-RC1.jar"
+                sh "curl -v -u $MAVEN_USER:$MAVEN_PASS --upload-file java_webapp/target/java-webapp*.jar $MAVEN_REPO"
             }
         }
     }
