@@ -76,10 +76,10 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('Cynerge Sonarqube') {
-                    sh "mvn -Dsonar.login=$SONAR_TOKEN
-                     -Dsonar.projectKey=$SONAR_PROJECT 
-                     -Dsonar.junit.reportPaths=$SONAR_REPORTS 
-                     -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT 
+                    sh "mvn -Dsonar.login=$SONAR_TOKEN \
+                     -Dsonar.projectKey=$SONAR_PROJECT \
+                     -Dsonar.junit.reportPaths=$SONAR_REPORTS \
+                     -Dsonar.coverage.jacoco.xmlReportPaths=$JACOCO_REPORT \
                      clean verify sonar:sonar"
                 }
             }
