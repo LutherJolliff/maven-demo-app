@@ -5,12 +5,13 @@
 def shipyardBuildBadge = addEmbeddableBadgeConfiguration(id: "shipyard-build", subject: "Shipyard Build")
 
 pipeline {
+// Use Maven container to run pipeline stages
     agent {
         docker {
             image 'maven:3.6.2-jdk-13'
         }
     }
-
+// Location for setting global environment variables
     environment {
         EMAIL_RECIPIANTS = 'ljolliff@cynerge.com'
         NEXUS_USER = credentials('nexus-user')
@@ -26,11 +27,13 @@ pipeline {
     }
 
     stages {
+// Clear any previously compiled files, then compile and package artifact
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+// Run any defined unit tests
         stage('Unit Testing') {
             steps {
                 sh 'mvn test'
@@ -41,6 +44,7 @@ pipeline {
                 }
             }
         }
+// Test app accessability by scanning HTML files
         stage('Pa11y') {
             agent {
                 docker {
@@ -59,6 +63,7 @@ pipeline {
                     sh 'pa11y-ci-reporter-html'
                 }
             }
+// Send test results to Nexus repository
             post {
                 success {
                     // Do NOT delete the empty line underneath below curl command. It is necessary for script logic
@@ -69,7 +74,7 @@ pipeline {
                 }
             }
         }
-
+// Trigger an integrity scan from Sonarqube's server. The detailed results will be available in your Sonarqube dashboard
         stage('Sonarqube Analysis') {
             environment {
                 scannerHome = tool 'cynerge-sonarqube'
@@ -84,6 +89,7 @@ pipeline {
                 }
             }
         }
+// Store your build artifact in a Nexus Repository. The delivery script will largely differ with app type
         stage('Store Maven Artifact') {
             environment { 
                 MAVEN_USER = credentials('nexus-user')
@@ -99,7 +105,6 @@ pipeline {
     }
     post {
 // Send an email containing build status and other helpful info to appropriate recipiants
-
         success {
             script {
                 env.STATUS_SUCCESS = 'Job Complete!'
