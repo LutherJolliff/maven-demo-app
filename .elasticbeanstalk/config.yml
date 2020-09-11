@@ -1,0 +1,10 @@
+branch-defaults:
+    master:
+      environment: prod
+  global:
+    application_name: my-maven-app
+    default_ec2_keyname: AWS EC2
+    default_region: us-east-1
+    instance_profile: null
+    profile: null
+    sc: git  

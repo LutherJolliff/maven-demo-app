@@ -1,0 +1,20 @@
+resource "aws_elastic_beanstalk_application" "elastic-bean-app" {
+  name        = "${var.app}"
+  description = ""
+}
+
+resource "aws_elastic_beanstalk_environment" "elastic-bean-env" {
+  name                = "${var.environment}"
+  application         = "${aws_elastic_beanstalk_application.elastic-bean-app.name}"
+  solution_stack_name = "${var.nodetype}"
+  
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name = "IamInstanceProfile"
+    value = "${aws_iam_instance_profile.elastic_bean_profile.name}"
+  }
+}
+resource "aws_iam_instance_profile" "elastic_bean_profile" {
+  name = "basic_profile"
+  role = "aws-elasticbeanstalk-ec2-role"
+}
