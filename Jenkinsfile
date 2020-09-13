@@ -16,7 +16,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
         TF_VAR_environment = 'prod'
         TF_VAR_app = 'my-maven-app'
-        TF_VAR_nodetype = 'Corretto 11 running on 64bit Amazon Linux 2'
+        TF_VAR_appType = 'Corretto 11 running on 64bit Amazon Linux 2'
     }
 
     stages {
