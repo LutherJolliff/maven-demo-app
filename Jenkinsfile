@@ -38,7 +38,7 @@ pipeline {
                 dir('terraform') {
                     sh 'ls'
                     sh 'terraform init'
-                    sh 'terraform apply --var-file prod.tfvars -auto-approve'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }
