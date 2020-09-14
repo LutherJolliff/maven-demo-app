@@ -1,7 +1,9 @@
 # Multi-module Apache Maven example
 
-This project imports JaCoCo's aggregate XML report to be able to report coverage across modules as well as unit
+Originally, this project imports JaCoCo's aggregate XML report to be able to report coverage across modules as well as unit
 test coverage inside the module. For a basic example see [basic maven project](../maven-basic/README.md).
+
+This project now exists as both a Shipyard standard for Sonarqube scanning and a fun Java app for deployment testing.
 
 ## Usage
 
@@ -10,10 +12,6 @@ test coverage inside the module. For a basic example see [basic maven project](.
         mvn clean verify sonar:sonar
 
 ## Description
-
-This project consists of 3 modules. [`module1`](module1/pom.xml) and [`module2`](module2/pom.xml) contain "business logic" and 
-related unit tests. The [`tests`](tests/pom.xml) module contains integration tests which test functionality using both modules. 
-The `tests` module is also the one which creates the aggregate coverage report imported into SonarQube.
 
 To generate the report we configure the JaCoCo plugin to attach its agent to the JVM which is executing the tests in the top 
 level [pom](pom.xml). This configuration is done in the `<pluginManagment>` section, so it will be applied on every submodule.

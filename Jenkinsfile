@@ -45,8 +45,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'ls java_webapp/target'
-                // sh 'cp java_webapp/target/java-webapp*.jar .'
                 sh "eb deploy $TF_VAR_environment"
             }
         }   
