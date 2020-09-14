@@ -1,6 +1,9 @@
 branch-defaults:
   master:
     environment: prod
+environment-defaults:
+  maven-prod:
+    artifact: java_webapp/target/java-webapp-1.5.jar
 global:
   application_name: my-maven-app
   default_ec2_keyname: AWS EC2
