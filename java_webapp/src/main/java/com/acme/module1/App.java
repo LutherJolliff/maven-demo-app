@@ -31,7 +31,7 @@ public class App
     try {
       Spark.port(Integer.parseInt(System.getProperty("appPort")));
     } catch (Exception e) {
-      Spark.port(9999);
+      Spark.port(5000);
     }
 
     Spark.threadPool(10, 5, 600);
