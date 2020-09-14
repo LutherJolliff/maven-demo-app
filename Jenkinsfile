@@ -5,7 +5,7 @@ pipeline {
 // Use Maven container to run pipeline stages
     agent {
         docker {
-            image 'maven:3.6.2-jdk-13'
+            image 'cynergeconsulting/maven3-jdk13:latest'
         }
     }
 // Location for setting global environment variables
@@ -24,7 +24,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
-                sh 'mvn bu'
             }
         }
         stage('Terraform') {
@@ -46,7 +45,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'cynergeconsulting/browser-node-12'
+                    image 'cynergeconsulting/maven3-jdk13:latest'
                     alwaysPull true
                     args '-u root'
                 }
