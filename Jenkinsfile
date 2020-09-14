@@ -6,6 +6,7 @@ pipeline {
     agent {
         docker {
             image 'cynergeconsulting/maven3-jdk13:latest'
+                alwaysPull true
         }
     }
 // Location for setting global environment variables
