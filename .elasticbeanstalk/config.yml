@@ -2,7 +2,7 @@ branch-defaults:
   master:
     environment: prod
 environment-defaults:
-  maven-prod:
+  deploy:
     artifact: java_webapp/target/java-webapp-1.5.jar
 global:
   application_name: my-maven-app
