@@ -10,4 +10,4 @@ variable "app" {}
 
 variable "environment" {}
 
-variable "nodetype" {}
+variable "appType" {}
