@@ -14,7 +14,7 @@ pipeline {
         JOB_NAME = "${JOB_NAME}"
         AWS_ACCESS_KEY_ID = credentials('aws_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
-        TF_VAR_environment = 'prod'
+        TF_VAR_environment = 'production'
         TF_VAR_app = 'my-maven-app'
         TF_VAR_appType = '64bit Amazon Linux 2 v3.1.1 running Corretto 11'
     }
