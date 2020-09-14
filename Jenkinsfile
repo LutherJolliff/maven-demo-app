@@ -51,7 +51,9 @@ pipeline {
                 }
             }
             steps {
-                sh "eb deploy $TF_VAR_environment"
+                dir('java_webapp/target') {
+                    sh "eb deploy $TF_VAR_environment"
+                }
             }
         }   
     }
