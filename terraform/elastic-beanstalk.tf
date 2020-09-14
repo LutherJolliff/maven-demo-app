@@ -15,6 +15,6 @@ resource "aws_elastic_beanstalk_environment" "elastic-bean-env" {
   }
 }
 resource "aws_iam_instance_profile" "elastic_bean_profile" {
-  name = "basic_profile"
+  name = "basic_profile_maven"
   role = "aws-elasticbeanstalk-ec2-role"
 }
