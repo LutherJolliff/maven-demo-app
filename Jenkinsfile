@@ -14,7 +14,7 @@ pipeline {
         JOB_NAME = "${JOB_NAME}"
         AWS_ACCESS_KEY_ID = credentials('aws_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
-        TF_VAR_environment = 'production'
+        TF_VAR_environment = 'maven-prod'
         TF_VAR_app = 'my-maven-app'
         TF_VAR_appType = '64bit Amazon Linux 2 v3.1.1 running Corretto 11'
     }
@@ -43,16 +43,16 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent {
-                docker {
-                    image 'cynergeconsulting/maven3-jdk13:latest'
-                    alwaysPull true
-                    args '-u root'
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'cynergeconsulting/maven3-jdk13:latest'
+            //         alwaysPull true
+            //         args '-u root'
+            //     }
+            // }
             steps {
                 sh 'ls java_webapp/target'
-                // sh 'cp java_webapp/target/java-webapp*.jar .'
+                sh 'cp java_webapp/target/java-webapp*.jar .'
                 sh "eb deploy $TF_VAR_environment"
             }
         }   
