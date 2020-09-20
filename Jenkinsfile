@@ -51,8 +51,10 @@ pipeline {
     }
     post {
         cleanup {
+            script {
 // Clean up workspace after build
-            cleanWs()
+                cleanWs()
+            }
         }
     }
 }
