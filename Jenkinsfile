@@ -11,7 +11,6 @@ pipeline {
     }
 // Location for setting global environment variables
     environment {
-        JENKINS_URL = "${JENKINS_URL}"
         JOB_NAME = "${JOB_NAME}"
         AWS_ACCESS_KEY_ID = credentials('aws_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
