@@ -1,5 +1,5 @@
 variable "region" {
-  default = "us-east-1"
+  default = "us-gov-east-1"
 }
 
 variable "profile" {
