@@ -12,8 +12,8 @@ pipeline {
 // Location for setting global environment variables
     environment {
         JOB_NAME = "${JOB_NAME}"
-        AWS_ACCESS_KEY_ID = credentials('aws_id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
+        // AWS_ACCESS_KEY_ID = credentials('aws_id')
+        // AWS_SECRET_ACCESS_KEY = credentials('aws_secret')
         AWS_DEFAULT_REGION = credentials('aws_region')
         TF_VAR_environment = 'maven-fs-test'
         TF_VAR_app = 'my-maven-app'
