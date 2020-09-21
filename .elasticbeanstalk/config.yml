@@ -5,8 +5,8 @@ deploy:
   artifact: java_webapp/target/java-webapp-1.5.jar
 global:
   application_name: my-maven-app
-  default_ec2_keyname: AWS EC2
-  default_region: us-east-1
+  default_ec2_keyname: GovCloud-east
+  default_region: us-gov-east-1
   instance_profile: null
   profile: null
   sc: git  
